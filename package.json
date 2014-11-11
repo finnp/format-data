@@ -1,0 +1,33 @@
+{
+  "name": "format-data",
+  "version": "1.0.0",
+  "description": "Format tabular data from object streams to different (standard) formats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finnp/format-data"
+  },
+  "keywords": [
+    "format",
+    "serialize",
+    "tabular",
+    "ndjson",
+    "csv",
+    "json"
+  ],
+  "author": "Finn Pauls",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finnp/format-data/issues"
+  },
+  "homepage": "https://github.com/finnp/format-data",
+  "dependencies": {
+    "csv-write-stream": "^0.2.1",
+    "ndjson": "^1.2.3",
+    "sleep-ref": "^1.1.0",
+    "ssejson": "^1.1.0"
+  }
+}
