@@ -13,12 +13,14 @@ module.exports = function (format, opts) {
   
   console.log(opts)
   
-  if(format === 'json') return new SLEEPStream(opts)
   if(format === 'ndjson') return ndjson.stringify(opts)
   if(format === 'csv') return csv(opts)
   if(format === 'sse') {
     opts.event = 'event' in opts ? opts.event : 'data' // default to 'data'
     return sse.serialize(opts)
   }
+  
+  //default to json
+  return new SLEEPStream(opts)
   
 }

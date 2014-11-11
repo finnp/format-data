@@ -6,7 +6,9 @@ var streams = [
   formatData('sse'),
   formatData('json'),
   formatData({format: 'json', style: 'object'}),
-  formatData('json', {style: 'newline'})
+  formatData('json', {style: 'newline'}),
+  formatData({style: 'sse'}),
+  formatData()
 ]
 
 function testStreams() {
