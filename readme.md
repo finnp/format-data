@@ -1,6 +1,6 @@
 
 Module for formatting tabular data from object streams in different standard ways.
-Supporting `csv`, `ndjson`, `json` and `sse`.
+Supporting `csv`, `ndjson`, `json` and `sse`. Install with `npm install format-data`.
 
 ## Usage
 
@@ -25,14 +25,3 @@ Formats and the used modules:
 * `'ndjson'` - `require('ndjson').stringify(opts)`
 * `json` - `new require('sleep-ref').SLEEPStream()`
 * `sse` - `require('ssejson').serialize(opts)`
-
-
-## Options
-
-
-
-### format
-
-Format that maps directly to a mime type
-
-
