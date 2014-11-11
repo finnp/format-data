@@ -11,8 +11,6 @@ module.exports = function (format, opts) {
     delete opts.format
   }
   
-  console.log(opts)
-  
   if(format === 'ndjson') return ndjson.stringify(opts)
   if(format === 'csv') return csv(opts)
   if(format === 'sse') {
