@@ -1,3 +1,7 @@
+# format-data
+Windows | Mac/Linux
+------- | ---------
+[![Windows Build status](http://img.shields.io/appveyor/ci/finnp/format-data.svg)](https://ci.appveyor.com/project/finnp/format-data/branch/master) | [![Build Status](https://travis-ci.org/finnp/format-data.svg?branch=master)](https://travis-ci.org/finnp/format-data)
 
 Module for formatting tabular data from object streams in different standard ways.
 Supporting `csv`, `ndjson`, `json` and `sse`. Install with `npm install format-data`.
