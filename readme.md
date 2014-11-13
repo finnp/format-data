@@ -10,8 +10,7 @@ formatData(format, [opts])
 The `opts` object will be passed to the underlying serializing module (see below).
 
 
-or just pass an options object with `format` as a key. The format key will be deletec
-before passing it to the underlying module.
+or just pass an options object with `format` as a key.
 
 ```js
 formatData(opts)
@@ -23,5 +22,5 @@ Formats and the used modules:
 
 * `'csv'`  - `require('csv-write-stream')(opts)`
 * `'ndjson'` - `require('ndjson').stringify(opts)`
-* `json` - `new require('sleep-ref').SLEEPStream()`
+* `json` - `new require('./json.js')(opts)`
 * `sse` - `require('ssejson').serialize(opts)`

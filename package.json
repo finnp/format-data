@@ -4,7 +4,7 @@
   "description": "Format tabular data from object streams to different (standard) formats",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,13 @@
   },
   "homepage": "https://github.com/finnp/format-data",
   "dependencies": {
-    "csv-write-stream": "^0.2.1",
+    "csv-write-stream": "^0.2.2",
+    "inherits": "^2.0.1",
     "ndjson": "^1.2.3",
-    "sleep-ref": "^1.1.0",
-    "ssejson": "^1.1.0"
+    "ssejson": "^1.1.1"
+  },
+  "devDependencies": {
+    "concat-stream": "^1.4.6",
+    "tape": "^3.0.3"
   }
 }
