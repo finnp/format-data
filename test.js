@@ -23,6 +23,12 @@ test('formats', function (t) {
 
 })
 
+test('errors', function(t) {
+  var tStream = errorStream.bind(this, t)
+  t.plan(1)
+  tStream(formatData('json'), '{"rows":[{"a":1,"b":2},{"error":"Oh no!"}]}')
+})
+
 function testStream(t, stream, expect) {
   stream.pipe(concat(function (result) {
     t.equals(result, expect)
@@ -30,5 +36,13 @@ function testStream(t, stream, expect) {
   stream.write({a: 1, b:2})
   stream.write({a: 'hello', b:'world'})
   stream.end()
+}
+
+function errorStream(t, stream, expect) {
+  stream.pipe(concat(function (result) {
+    t.equals(result, expect)
+  }))
+  stream.write({a: 1, b:2})
+  stream.destroy(new Error('Oh no!'))
 }
 
