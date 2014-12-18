@@ -23,6 +23,20 @@ test('formats', function (t) {
 
 })
 
+test('errors', function (t) {
+  var eStream = errorStream.bind(this, t)
+  t.plan(4)
+  
+  eStream(true, formatData('json'), '{"rows":[{"a":1,"b":2}],"error":"Oh no!"}')
+
+  eStream(true, formatData({format: 'json', style: 'array'}), '[{"a":1,"b":2}]\n{"error":"Oh no!"}')
+
+  eStream(false, formatData('json'), '{"rows":[],"error":"Oh no!"}')
+
+  eStream(false, formatData({format: 'json', style: 'array'}), '[]\n{"error":"Oh no!"}')
+
+})
+
 function testStream(t, stream, expect) {
   stream.pipe(concat(function (result) {
     t.equals(result, expect)
@@ -32,3 +46,10 @@ function testStream(t, stream, expect) {
   stream.end()
 }
 
+function errorStream(t, data, stream, expect) {
+  stream.pipe(concat(function (result) {
+    t.equals(result, expect)
+  }))
+  if(data) stream.write({a: 1, b:2})
+  stream.destroy(new Error('Oh no!'))
+}
