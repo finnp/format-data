@@ -2,12 +2,13 @@ var test = require('tape')
 
 var formatData = require('./')
 var concat = require('concat-stream')
+var EOL = require('os').EOL
 
 test('formats', function (t) {
   var tStream = testStream.bind(this, t)
   t.plan(7)
   
-  tStream(formatData('ndjson'), '{"a":1,"b":2}\n{"a":"hello","b":"world"}\n')
+  tStream(formatData('ndjson'), '{"a":1,"b":2}' + EOL + '{"a":"hello","b":"world"}' + EOL)
   
   tStream(formatData('csv'), 'a,b\n1,2\nhello,world\n')
   
