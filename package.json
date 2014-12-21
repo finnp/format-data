@@ -28,7 +28,7 @@
     "csv-write-stream": "^0.2.2",
     "inherits": "^2.0.1",
     "ndjson": "^1.2.3",
-    "ssejson": "^1.1.1"
+    "ssejson": "^1.2.0"
   },
   "devDependencies": {
     "concat-stream": "^1.4.6",
