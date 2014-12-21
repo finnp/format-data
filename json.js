@@ -11,6 +11,8 @@ function JSONFormat(opts) {
   this.style = opts.style || 'object'
   this.started = false
   this.i = 0
+  this.destroyed = false
+  this.err = false
 }
   
 JSONFormat.prototype._transform = function (data, enc, cb) {
@@ -24,8 +26,9 @@ JSONFormat.prototype._transform = function (data, enc, cb) {
   } else if(this.style === 'object') {
      if (this.i === 0) this.push('{"rows":[')
      else this.push(',')
+     this.push(JSON.stringify(data))
      
-    cb(null, JSON.stringify(data))
+    cb(null)
     
  // the following are technically not JSON, but included to be compliant with 
  
@@ -48,12 +51,22 @@ JSONFormat.prototype._flush = function (cb) {
     } else if (this.style === 'array') {
       if (this.started) this.push(']')
       else this.push('[]')
+      if(this.err) this.push('\n' + JSON.stringify({error: this.err.message}))
     } else if (this.style === 'object') {
-      if (this.started) this.push(']}')
-      else this.push('{"rows":[]}')
+      if (!this.started) this.push('{"rows":[')
+      if(this.err) this.push('],"error":' + JSON.stringify(this.err.message) + '}')
+      else this.push(']}')
     } else {
       return this.emit('error', new Error('unknown feed style.'))
     }
     cb()
+}
+
+JSONFormat.prototype.destroy = function(err) {
+  if (this.destroyed) return
+  this.destroyed = true
+
+  this.err = err
+  this.end()
 }
 
