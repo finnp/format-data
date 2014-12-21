@@ -26,7 +26,7 @@ test('formats', function (t) {
 
 test('errors', function (t) {
   var eStream = errorStream.bind(this, t)
-  t.plan(5)
+  t.plan(7)
   
   eStream(true, formatData('json'), '{"rows":[{"a":1,"b":2}],"error":"Oh no!"}')
 
@@ -37,6 +37,11 @@ test('errors', function (t) {
   eStream(false, formatData({format: 'json', style: 'array'}), '[]\n{"error":"Oh no!"}')
 
   eStream(true, formatData('sse'), 'event: data\ndata: {"a":1,"b":2}\n\nevent: error\ndata: {"message":"Oh no!"}\n\n')
+
+  eStream(true, formatData('ndjson'), '{"a":1,"b":2}\n\nError:\nOh no!')
+  
+  eStream(true, formatData('csv'), 'a,b\n1,2\n\nError:\nOh no!')
+
 
 })
 
