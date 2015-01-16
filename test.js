@@ -44,11 +44,9 @@ test('errors', function (t) {
 
   eStream(true, formatData('sse'), 'event: data\ndata: {"a":1,"b":2}\n\nevent: error\ndata: {"message":"Oh no!"}\n\n')
 
-  eStream(true, formatData('ndjson'), '{"a":1,"b":2}\n\nError:\nOh no!')
+  eStream(true, formatData('ndjson'), '{"a":1,"b":2}' + EOL + '\nError:\nOh no!')
 
   eStream(true, formatData('csv'), 'a,b\n1,2\n\nError:\nOh no!')
-
-
 })
 
 function testStream(t, stream, expect) {
