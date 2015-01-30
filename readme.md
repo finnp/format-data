@@ -20,6 +20,48 @@ or just pass an options object with `format` as a key.
 formatData(opts)
 ```
 
+## full control of prefix, separator, suffix
+
+You can pass a custom prefix, separator, or suffix to the stream builder for csv and json cases.
+
+Examples:
+
+```js
+## default separator for csv is ','
+> formatData('csv')
+'a,b\n1,2\nhello,world\n'
+
+## change separator to a tab
+> formatData({format: 'csv', separator: '\t'})
+'a\tb\n1\t2\nhello\tworld\n'
+
+## default object style finishes with }]
+> formatData({
+  format: 'json',
+  style: 'object'
+})
+{"rows":[{"a":1,"b":2},{"a":"hello","b":"world"}]}
+
+## custom suffix
+> formatData({
+  format: 'json',
+  style: 'object',
+  suffix: ', "next": "/api/rows?page=2"}'
+})
+{"rows":[{"a":1,"b":2},{"a":"hello","b":"world"}], "next": "/api/rows?page=2"}
+
+## suffix still added in cases of error
+> formatData({
+  format: 'json',
+  style: 'object',
+  suffix: ', "next": "/api/rows?page=2"}'
+})
+{"rows":[], "error":"Oh no!", "next": "/api/rows?page=2"}
+
+```
+
+
+
 ## format
 
 Formats and the used modules:
