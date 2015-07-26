@@ -9,6 +9,7 @@ function JSONFormat(opts) {
   if(!(this instanceof JSONFormat)) return new JSONFormat(opts)
   Transform.call(this, {objectMode: true})
   this.style = opts.style || 'object'
+  this.key = opts.key || 'rows'
   this.prefix = opts.prefix
   this.separator = opts.separator
   this.suffix = opts.suffix
@@ -28,7 +29,7 @@ JSONFormat.prototype._transform = function (data, enc, cb) {
 
     cb(null, JSON.stringify(data))
   } else if(this.style === 'object') {
-     if (this.i === 0) this._prefix('{"rows":[')
+     if (this.i === 0) this._prefix('{"' + this.key + '":[')
      else this._separator(',')
      this.push(JSON.stringify(data))
 
@@ -73,7 +74,7 @@ JSONFormat.prototype._flush = function (cb) {
         this.push(JSON.stringify({error: this.err.message}))
       }
     } else if (this.style === 'object') {
-      if (!this.started) this._prefix('{"rows":[')
+      if (!this.started) this._prefix('{"'+ this.key + '":[')
       if(this.err) {
         this.push('],"error":' + JSON.stringify(this.err.message))
         this._suffix('}')
